@@ -39,19 +39,32 @@
           <!-- Main Links -->
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <%= link_to "Dashboard", root_path, class: "nav-link active" %>
+              <%= link_to "Dashboard", root_path,
+                    class: "nav-link #{'active' if current_page?(root_path)}" %>
             </li>
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "My Portfolio", user_stocks_path,
+                      class: "nav-link #{'active' if controller_name == 'user_stocks'}" %>
+              </li>
+            <% end %>
           </ul>
 
-          <!-- Search Form -->
-          <form class="d-flex me-lg-3 mb-2 mb-lg-0" role="search">
-            <div class="input-group">
-              <input class="form-control form-control-sm" type="search" placeholder="Search stock symbol..." aria-label="Search">
-              <button class="btn btn-outline-light btn-sm" type="submit">
-                <i class="bi bi-search"></i>
-              </button>
-            </div>
-          </form>
+          <!-- Search Form (signed-in users only, the search endpoint requires login) -->
+          <% if user_signed_in? %>
+            <%= form_with url: search_stocks_path, method: :get,
+                  class: "d-flex me-lg-3 mb-2 mb-lg-0", role: "search" do %>
+              <div class="input-group">
+                <%= search_field_tag :q, params[:q],
+                      class: "form-control form-control-sm",
+                      placeholder: "Search stock symbol...",
+                      "aria-label": "Search" %>
+                <button class="btn btn-outline-light btn-sm" type="submit" aria-label="Search">
+                  <i class="bi bi-search"></i>
+                </button>
+              </div>
+            <% end %>
+          <% end %>
 
           <!-- Devise User Auth Links -->
           <ul class="navbar-nav">
@@ -63,7 +76,10 @@
                 <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="navbarDropdown">
                   <li><%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item text-danger" %></li>
+                  <li>
+                    <%= button_to "Sign Out", destroy_user_session_path,
+                          method: :delete, class: "dropdown-item text-danger" %>
+                  </li>
                 </ul>
               </li>
             <% else %>
@@ -79,16 +95,16 @@
       </div>
     </nav>
 
-    <!-- Main Content Area & Devise Flash Messages -->
+    <!-- Main Content Area & Flash Messages -->
     <main class="container my-4 flex-grow-1">
-      <% if notice %>
+      <% if notice.present? %>
         <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
           <i class="bi bi-info-circle-fill me-2"></i><%= notice %>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <% end %>
 
-      <% if alert %>
+      <% if alert.present? %>
         <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
           <i class="bi bi-exclamation-triangle-fill me-2"></i><%= alert %>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

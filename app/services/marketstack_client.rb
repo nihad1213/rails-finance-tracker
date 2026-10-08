@@ -1,7 +1,7 @@
 require "net/http"
 require "json"
 
-class MarketStackClient
+class MarketstackClient
   class Error < StandardError; end
   class NotFound < Error; end
 
