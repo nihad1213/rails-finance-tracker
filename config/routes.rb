@@ -12,6 +12,13 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
+  resources :stocks, only: [ :show ], param: :symbol, constraints: { symbol: /[^\/]+/ } do
+    collection { get :search }
+  end
+
+  resources :user_stocks, path: "portfolio", only: [ :index, :create, :destroy ]
+
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
