@@ -1,0 +1,35 @@
+<div class="d-flex justify-content-between align-items-start mb-3">
+  <div>
+    <h1 class="h3 mb-0"><%= @stock.symbol %> <small class="text-muted fs-6"><%= @stock.name %></small></h1>
+    <div class="display-6">$<%= number_with_precision(@stock.last_price, precision: 2) %></div>
+    <div class="text-muted small">Close on <%= @stock.last_price_date %></div>
+  </div>
+
+  <% if @in_portfolio %>
+    <span class="badge text-bg-success">In portfolio</span>
+  <% else %>
+    <%= button_to "Add to portfolio", user_stocks_path(symbol: @stock.symbol),
+          method: :post, class: "btn btn-success" %>
+  <% end %>
+</div>
+
+<div class="card shadow-sm">
+  <div class="card-header">Last 30 days</div>
+  <div class="table-responsive">
+    <table class="table table-sm mb-0">
+      <thead><tr><th>Date</th><th>Open</th><th>High</th><th>Low</th><th>Close</th><th>Volume</th></tr></thead>
+      <tbody>
+        <% @history.each do |d| %>
+          <tr>
+            <td><%= d["date"].to_date %></td>
+            <td><%= number_with_precision(d["open"], precision: 2) %></td>
+            <td><%= number_with_precision(d["high"], precision: 2) %></td>
+            <td><%= number_with_precision(d["low"], precision: 2) %></td>
+            <td><%= number_with_precision(d["close"], precision: 2) %></td>
+            <td><%= number_with_delimiter(d["volume"].to_i) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<h2 class="h4 mb-3">My Portfolio</h2>
+
+<% if @user_stocks.empty? %>
+  <div class="alert alert-secondary">Nothing here yet. Search for a symbol and add it.</div>
+<% else %>
+  <table class="table bg-white shadow-sm align-middle">
+    <thead><tr><th>Symbol</th><th>Name</th><th>Last close</th><th>Date</th><th></th></tr></thead>
+    <tbody>
+      <% @user_stocks.each do |us| %>
+        <tr>
+          <td><%= link_to us.stock.symbol, stock_path(us.stock.symbol) %></td>
+          <td><%= us.stock.name %></td>
+          <td>$<%= number_with_precision(us.stock.last_price, precision: 2) %></td>
+          <td><%= us.stock.last_price_date %></td>
+          <td class="text-end">
+            <%= button_to "Remove", user_stock_path(us), method: :delete,
+                  class: "btn btn-sm btn-outline-danger", form: { data: { turbo_confirm: "Remove?" } } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
