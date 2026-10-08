@@ -42,8 +42,14 @@
               <%= link_to "Dashboard", root_path, class: "nav-link active" %>
             </li>
             <li class="nav-item">
-              <%= link_to "My Portfolio", "#", class: "nav-link" %>
-            </li>
+              <%= form_with url: search_stocks_path, method: :get, class: "d-flex me-lg-3 mb-2 mb-lg-0", role: "search" do %>
+                <div class="input-group">
+                  <%= search_field_tag :q, params[:q], class: "form-control form-control-sm",
+                        placeholder: "Search stock symbol...", "aria-label": "Search" %>
+                  <button class="btn btn-outline-light btn-sm" type="submit"><i class="bi bi-search"></i></button>
+                </div>
+              <% end %>           
+             </li>
           </ul>
 
           <!-- Search Form -->
