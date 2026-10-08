@@ -87,6 +87,9 @@ GEM
       msgpack (~> 1.5)
     bootstrap (5.3.8)
       popper_js (>= 2.11.8, < 3)
+    bootstrap_form (5.6.1)
+      actionpack (>= 7.2)
+      activemodel (>= 7.2)
     brakeman (8.1.0)
       racc
     builder (3.3.0)
@@ -118,6 +121,10 @@ GEM
       railties (>= 7.0)
       responders
       warden (~> 1.2.3)
+    devise-bootstrap-form (0.3.0)
+      bootstrap_form (>= 4.0.0.alpha1)
+      devise (>= 4.6.0)
+      rails (>= 5.0.0)
     dotenv (3.2.0)
     drb (2.2.3)
     ed25519 (1.4.0)
@@ -430,12 +437,14 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   bootstrap (~> 5.3.3)
+  bootstrap_form (~> 5.0)
   brakeman
   bundler-audit
   capybara
   dartsass-rails
   debug
   devise
+  devise-bootstrap-form
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
@@ -477,6 +486,7 @@ CHECKSUMS
   bindex (0.8.1) sha256=7b1ecc9dc539ed8bccfc8cb4d2732046227b09d6f37582ff12e50a5047ceb17e
   bootsnap (1.26.0) sha256=ca96237015e6cd74a02963d5821cf00ac5ea134653b323e8cd6d702a7718bf1b
   bootstrap (5.3.8) sha256=1c23b06df24ec28a0058ad90a0da93e260d2c0a5c453d7087f6bad428464742f
+  bootstrap_form (5.6.1) sha256=ec4ac273ce0eae0e6d13fc12e8ceb96ad4498e47f440a1fb1d06ac8a990b8689
   brakeman (8.1.0) sha256=cfa9e5214e4925842f4bc849a64f8a7e6c5d0425fe98eac8d7b7bc60fdc17e07
   builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
   bundler-audit (0.9.3) sha256=81c8766c71e47d0d28a0f98c7eed028539f21a6ea3cd8f685eb6f42333c9b4e9
@@ -488,6 +498,7 @@ CHECKSUMS
   date (3.6.0) sha256=18ac945c4e24ebd93534f8eab8c2fd8c5604b3e977105b3798d62a1e8d27b580
   debug (1.11.1) sha256=2e0b0ac6119f2207a6f8ac7d4a73ca8eb4e440f64da0a3136c30343146e952b6
   devise (5.0.4) sha256=d605f2b85854e74e56ee789e2d398702bc2d06e6bcd894717a670a3199c74cc1
+  devise-bootstrap-form (0.3.0) sha256=d969a1043ffc7630daf3da420abd76c76929800fe7580ab1e441bd7bd7edaff1
   dotenv (3.2.0) sha256=e375b83121ea7ca4ce20f214740076129ab8514cd81378161f11c03853fe619d
   drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
   ed25519 (1.4.0) sha256=16e97f5198689a154247169f3453ef4cfd3f7a47481fde0ae33206cdfdcac506

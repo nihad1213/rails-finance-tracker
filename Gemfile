@@ -25,6 +25,11 @@ gem "devise"
 gem "dartsass-rails"
 gem "bootstrap", "~> 5.3.3"
 
+gem "bootstrap_form", "~> 5.0"
+# gem "devise-i18n"
+# gem "devise_invitable"
+gem "devise-bootstrap-form"
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
